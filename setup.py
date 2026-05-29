@@ -53,6 +53,8 @@ setup(
             'tag_yolo_detector_node       = jackal_mine_detection.tag_yolo_detector_node:main',
             'tag_recorder_node            = jackal_mine_detection.tag_recorder_node:main',
             'automatic_driving_node       = jackal_mine_detection.automatic_driving_node:main',
+            'global_planner_node          = jackal_mine_detection.global_planner_node:main',
+            'pure_pursuit_node = jackal_mine_detection.pure_pursuit_node:main',
         ],
     },
 )
