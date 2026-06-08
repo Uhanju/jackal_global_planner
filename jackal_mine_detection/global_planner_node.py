@@ -11,7 +11,7 @@ class GlobalPlannerNode(Node):
     def __init__(self):
         super().__init__('global_planner_node')
         self.map_frame          = 'map'
-        self.robot_frame        = 'odom'
+        self.robot_frame        = 'base_link'
         self.obstacle_threshold = 50
         self.inflation_radius_m = 0.1
         self.replan_interval    = 2.0
