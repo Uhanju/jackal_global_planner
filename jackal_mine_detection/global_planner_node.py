@@ -11,9 +11,9 @@ class GlobalPlannerNode(Node):
     def __init__(self):
         super().__init__('global_planner_node')
         self.map_frame          = 'map'
-        self.robot_frame        = 'base_link'
+        self.robot_frame        = 'odom'
         self.obstacle_threshold = 50
-        self.inflation_radius_m = 0.35
+        self.inflation_radius_m = 0.1
         self.replan_interval    = 2.0
         self.map_data         = None
         self.map_width        = None
@@ -74,9 +74,7 @@ class GlobalPlannerNode(Node):
         if not self.is_valid_grid(*goal):
             self.get_logger().warn('목표점이 맵 밖')
             return
-        if self.is_obstacle(*start):
-            self.get_logger().warn('시작점이 장애물 안 - 위치 확인 필요')
-            return
+
         goal = self.find_nearest_free(goal)
         if goal is None:
             self.get_logger().warn('목표점 근처 빈 공간 없음')
@@ -178,7 +176,7 @@ class GlobalPlannerNode(Node):
     def get_robot_pose(self):
         try:
             trans = self.tf_buffer.lookup_transform(
-                self.map_frame, self.robot_frame, rclpy.time.Time())
+                self.map_frame, self.robot_frame, rclpy.time.Time(), timeout=rclpy.duration.Duration(seconds=0.1))
             x = trans.transform.translation.x
             y = trans.transform.translation.y
             return x, y

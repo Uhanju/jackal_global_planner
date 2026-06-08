@@ -5,11 +5,11 @@ Pure Pursuit 기반 Local Planner (Nav2 미사용)
 
 구독:
   /path                    (nav_msgs/Path)
-  /j100_0915/platform/odom (nav_msgs/Odometry)
+  /odom (nav_msgs/Odometry)
   /tag_detected            (std_msgs/Bool)
 
 발행:
-  /j100_0915/cmd_vel       (geometry_msgs/Twist)
+  /cmd_vel       (geometry_msgs/Twist)
 """
 
 import math
@@ -42,7 +42,7 @@ class PurePursuitNode(Node):
 
         self.odom_sub = self.create_subscription(
             Odometry,
-            '/j100_0915/platform/odom',
+            '/odom',
             self.odom_callback,
             10
         )
@@ -56,7 +56,7 @@ class PurePursuitNode(Node):
 
         self.cmd_pub = self.create_publisher(
             Twist,
-            '/j100_0915/cmd_vel',
+            '/cmd_vel',
             10
         )
 
